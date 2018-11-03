@@ -137,7 +137,7 @@ def get_average_y(word):
 # make wordList into a list of phrases that share 'same' y-avg
 def get_phrase_dict(wordList):
     phrases = {}
-    y_coordinate_error = 35 # value subject to change
+    y_coordinate_error = 10 # value subject to change
     for word in wordList:
         wordplaced = False # to ensure that the word is placed in dict somewhere
         y_coord = word[1]
@@ -154,7 +154,7 @@ def get_phrase_dict(wordList):
 
 # join the phrases with their respective price
 def join_phrase_price(phrases, prices):
-    y_coordinate_error = 55 # subject to change
+    y_coordinate_error = 25 # subject to change
     finalDict = {}
     # add all the phrases into the dict
     for y_coord in phrases:
@@ -211,16 +211,19 @@ def read_text(image):
                     # put the words in the right list
                     if word_text.isdigit() and prevWord != ".":
                         num = int(word_text)
-                        count = 2
+                        count = 1
                     elif word_text.isdigit() and prevWord == "." and count == 0:
                         num = num + int(word_text)/100
                         average_y = get_average_y(word)
                         priceList.append((num, average_y))
+                        count = -1
+                    elif word_text == '.' and count == 1:
+                        count = 0
                     else: # if normal text
                         average_y = get_average_y(word)
                         wordList.append((word_text, average_y[0]))
+                        count = -1
                     prevWord = word_text
-                    count -= 1
     phrasesDict = get_phrase_dict(wordList)
     finalDict = join_phrase_price(phrasesDict, priceList)
     print(phrasesDict)
