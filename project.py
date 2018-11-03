@@ -5,8 +5,6 @@ import os
 import argparse
 from enum import Enum
 import tkinter as tk
-import matplotlib
-matplotlib.use('Agg')
 
 # Imports the Google Cloud client library
 from google.cloud import vision
