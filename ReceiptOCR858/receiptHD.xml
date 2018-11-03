@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<receipts count="1" xmlns="http://www.abbyy.com/ReceiptCaptureSDK_xml/ReceiptCapture-1.1.xsd">
+	<receipt currency="USD" rotation="RT_NoRotation">
+		<vendor confidence="0.000" isSuspicious="true">
+			<name>
+				<recognizedValue>
+					<text>■■■</text>
+				</recognizedValue>
+			</name>
+			<fullAddress>
+				<text><![CDATA[I* Ih No.‘l5lozza Sticks 1 f21.45,
+■ IxMDeePFriedPickles ■
+■ P x No.301 Diet Coca-Cola $jd
+M ilxWSla. Ill'll
+. u No]]></text>
+			</fullAddress>
+			<purchaseType>Restaurant</purchaseType>
+		</vendor>
+		<payment type="Card" cardType="Undefined">
+			<value>
+				<normalizedValue>0.00</normalizedValue>
+			</value>
+			<cardNumber>
+				<normalizedValue/>
+			</cardNumber>
+		</payment>
+		<recognizedItems count="1">
+			<item index="1">
+				<name confidence="0" isSuspicious="true">
+					<text>I* Ih No.‘l5lozza Sticks</text>
+				</name>
+				<count confidence="19" isSuspicious="true">
+					<normalizedValue>1.000</normalizedValue>
+				</count>
+				<total confidence="54" isSuspicious="true">
+					<normalizedValue>21.45</normalizedValue>
+					<recognizedValue>
+						<text>21.45</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[I* Ih No.‘l5lozza Sticks 1 f21.45,
+■ IxMDeePFriedPickles ■
+■ P x No.301 Diet Coca-Cola $jd
+M ilxWSla. Ill'll
+. u No.S99 Tip The Driver (lk)| k&N]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+		</recognizedItems>
+		<country>
+			<normalizedValue>USA</normalizedValue>
+		</country>
+		<recognizedText><![CDATA[■■■                                               
+I* Ih No.‘l5lozza Sticks 1 f21.45,                
+■ IxMDeePFriedPickles         ■                   
+■ P x No.301 Diet Coca-Cola $jd                   
+M ilxWSla.            Ill'll                      
+. u No.S99 Tip The Driver (lk)| k&N               
+k 3,30                                            
+\ Comments: dToientaires: jes _■ J meant to I     
+Vm* order 3 mozzarella sticks, Please dont iu M   
+' \   dge me. Im having a bad meek and mas so ex M
+V    cited they mere back on the menu. ;)/^/| i ■ 
+]]></recognizedText>
+	</receipt>
+</receipts>

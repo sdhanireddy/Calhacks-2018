@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<receipts count="1" xmlns="http://www.abbyy.com/ReceiptCaptureSDK_xml/ReceiptCapture-1.1.xsd">
+	<receipt currency="USD" rotation="RT_NoRotation">
+		<vendor confidence="0.000" isSuspicious="true">
+			<name>
+				<recognizedValue>
+					<text>La Lasca</text>
+				</recognizedValue>
+			</name>
+			<fullAddress>
+				<text><![CDATA[52a HIGH ST.KINGSTON-UPON-THAMES
+KT1 1EU]]></text>
+			</fullAddress>
+			<address>
+				<text><![CDATA[52a HIGH ST.
+-UPON-THAMES]]></text>
+			</address>
+			<phone confidence="0" isSuspicious="true">
+				<normalizedValue>4391002</normalizedValue>
+				<recognizedValue>
+					<text>439 1002</text>
+				</recognizedValue>
+			</phone>
+			<fax>
+				<normalizedValue>02084391003</normalizedValue>
+				<recognizedValue>
+					<text>0208 439 1003</text>
+				</recognizedValue>
+			</fax>
+			<purchaseType>Restaurant</purchaseType>
+			<city>
+				<normalizedValue>KINGSTON</normalizedValue>
+				<recognizedValue>
+					<text>KINGSTON</text>
+				</recognizedValue>
+			</city>
+		</vendor>
+		<date confidence="97" isSuspicious="false">
+			<normalizedValue>2007-03-03</normalizedValue>
+			<recognizedValue>
+				<text>03/03/07</text>
+			</recognizedValue>
+		</date>
+		<time confidence="100" isSuspicious="false">
+			<normalizedValue>13:56:54</normalizedValue>
+			<recognizedValue>
+				<text>13:56:54</text>
+			</recognizedValue>
+		</time>
+		<total confidence="13" isSuspicious="true">
+			<normalizedValue>33.35</normalizedValue>
+			<recognizedValue>
+				<text>33
+35</text>
+			</recognizedValue>
+		</total>
+		<payment type="Card" cardType="Undefined">
+			<value>
+				<normalizedValue>33.35</normalizedValue>
+				<recognizedValue>
+					<text>33
+35</text>
+				</recognizedValue>
+			</value>
+			<cardNumber>
+				<normalizedValue/>
+			</cardNumber>
+		</payment>
+		<recognizedItems count="11">
+			<item index="1">
+				<name confidence="0" isSuspicious="true">
+					<text>Half Cruzcampo</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>1.75</normalizedValue>
+					<recognizedValue>
+						<text>1.75</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Half Cruzcampo 1.75]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="2">
+				<name confidence="0" isSuspicious="true">
+					<text>Orange Juice</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>2.45</normalizedValue>
+					<recognizedValue>
+						<text>2.45</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Orange Juice 2.45]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="3">
+				<name confidence="0" isSuspicious="true">
+					<text>Menu Para Ninos</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>3.95</normalizedValue>
+					<recognizedValue>
+						<text>3.95</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Menu Para Ninos 3.95]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="4">
+				<name confidence="0" isSuspicious="true">
+					<text>Pan de Ajo</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>2.75</normalizedValue>
+					<recognizedValue>
+						<text>2.75</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Pan de Ajo 2.75]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="5">
+				<name confidence="0" isSuspicious="true">
+					<text>R-Patatas Pobre</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>2.95</normalizedValue>
+					<recognizedValue>
+						<text>2.95</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 R-Patatas Pobre 2.95]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="6">
+				<name confidence="0" isSuspicious="true">
+					<text>Croquetas Champin</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>3.75</normalizedValue>
+					<recognizedValue>
+						<text>3.75</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Croquetas Champin 3.75]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="7">
+				<name confidence="0" isSuspicious="true">
+					<text>Montado Jamon Que</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>3.95</normalizedValue>
+					<recognizedValue>
+						<text>3.95</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Montado Jamon Que 3.95]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="8">
+				<name confidence="0" isSuspicious="true">
+					<text>Calamares</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>3.95</normalizedValue>
+					<recognizedValue>
+						<text>3.95</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Calamares 3.95]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="9">
+				<name confidence="0" isSuspicious="true">
+					<text>Cafe Doble</text>
+				</name>
+				<count confidence="99" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="86" isSuspicious="false">
+					<normalizedValue>2.00</normalizedValue>
+					<recognizedValue>
+						<text>2.00</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Cafe Doble 2.00]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="10">
+				<name confidence="0" isSuspicious="true">
+					<text>Cappuccino</text>
+				</name>
+				<count confidence="100" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>1.90</normalizedValue>
+					<recognizedValue>
+						<text>1.90</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Cappuccino 1.90]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+			<item index="11">
+				<name confidence="0" isSuspicious="true">
+					<text>Tarta Naranja</text>
+				</name>
+				<count confidence="99" isSuspicious="false">
+					<normalizedValue>1.000</normalizedValue>
+					<recognizedValue>
+						<text>1</text>
+					</recognizedValue>
+				</count>
+				<total confidence="85" isSuspicious="false">
+					<normalizedValue>3.95</normalizedValue>
+					<recognizedValue>
+						<text>3.95</text>
+					</recognizedValue>
+				</total>
+				<recognizedText><![CDATA[1 Tarta Naranja 3.95]]></recognizedText>
+				<amountUnits>unit</amountUnits>
+			</item>
+		</recognizedItems>
+		<country>
+			<normalizedValue>USA</normalizedValue>
+		</country>
+		<recognizedText><![CDATA[La Lasca                                 
+*= SPANISH TAPAS BAR & RESTAURANT ---    
+52a HIGH ST.KINGSTON-UPON-THAMES         
+KT1 1EU                                  
+Tel: 0208 439 1002 Fax: 0208 439 1003    
+VAT No: 693200741                        
+CHK# 10    TBL# 30                       
+SUPER STEF    #  103                     
+03/03/07 12:54:21            GUESTS 2    
+1 Half Cruzcampo        1.75             
+1 Orange Juice          2.45             
+1 Menu Para Ninos       3.95             
+1 Pan de Ajo            2.75             
+1 R-Patatas Pobre       2.95             
+1 Croquetas Champin     3.75             
+1 Montado Jamon Que     3.95             
+1 Calamares              3.95            
+1 Cafe Doble            2.00             
+1 Cappuccino             1.90            
+1 Tarta Naranja         3.95             
+Terminal 5         T#0000025 ----------- 
+TOTAL:         33.35                     
+VAT                                  4.97
+Last Serviced          03/03/07 13:56:54 
+SERVICE NOT INCL                         
+A 10% DISCRETIONARY SERVICE CHARGE WILL  
+BE ADDED FOR PARTIES OF 8 OR MORE        
+GRATUITY AT YOUR DISCRETION              
+BOOK NOW FOR                             
+MOTHER'S DAY!!1                          
+]]></recognizedText>
+	</receipt>
+</receipts>
