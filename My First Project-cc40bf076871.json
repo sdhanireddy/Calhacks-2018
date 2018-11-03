@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "striped-strata-217121",
+  "private_key_id": "cc40bf07687138314b391b871d1a35b16b649bd2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDfMwCTw4r4OYVU\n+qPVV71twbtsEqZF87g3nK/Y+irVIwtgSw6qN9RUceh5cOtkDgKF1pLIYaEibOB/\nmFnpoxcOIdLdKoAbK3INfGFBQmGXONHJ3hLHCOyLeZ4B03rGr9NHxIl9iZp6/amh\niykyxDVWlxNSmhEXzhhEHvwZL9C1tqP2R8sTxwNaBZ93wr3xsdtoCH/uk3AsIW/9\nMyrpzJH3wa0z/8Ea3VW25W8WOl0UtvUEBYpb3jMNW5invqPMgjJKrw1QHOE9T9r2\nWHky4wehHs0MJX+/TQ66pOmIsVmryEff+MY+BhLg9wfA1O5HoGNE0G5FAMxtoyBF\nsRsU5CB5AgMBAAECggEAIzYlmioYK27PpQdhf0+3N7B/g94xUwnO/x798uoMhdFg\ngxF0P9BM9AGAXmA9EmzPYxPl1izowciRZi+/x4cOJRGa9X819JNXC9+abDQvty6k\nkgcxySqUPrCyB7G4Rc4JM+JCmoZx04NfFnggyLyBeaadysM5fRrrYxvMQ6DyeSgK\nkXswfpY1qhQXQ6UuK4FLZf1HpqihLFhUJo0+bJ9Hu9GmTFIRjWgVtbpboZ1qm2Eq\nof3GzLz4s3SzRYQTur02HCr/0HgDs5CgJqQOlHe6zHvXttDeFa6PAWvFyZtYHEWo\nWDJ9gWM7a8QX8WeqclNaCTVfWEC41KzCRuloI2nAsQKBgQD74xUbmbDhz2GXZgIa\nWSFX55B9mvhmp5LE+EUJTG3obBsM9Gd0tgK7l+Z9y4/ldMeEVbFgRrMnvHSzPVAT\nP0ALRNrNv22ca8VMcO2LkU5kbQSNqztBKldCizdtYTdmS4rJFvL1ge9yeTfLrtaO\n1/5qcrjk07e7/HzJQUbWU/V4ZQKBgQDi2ABZBLQlpQqn4YH/z/FH0lwv4zwoniW4\nZJhvdyWONRQKTILI2pMqLtdKukkaYZ5S9t4DDBYvVQbrGvdpFoIJ3sEPK90YtJzc\nomHo8DzHvrJShuh9KcFpcMBtiTpfV3sPRFwDsfFqhrW1gj5CRK2TYyd+aJfAWzjW\nWDAnd18EhQKBgGN7wK5x+SZ2XbkKFPKLGVw6nRq+xjTlIlahJ8MQaKhPai+np+S0\nrkehKuusJl0dzl856SB5S/D5wa25HZM8e/L3cuOoI4aQGhCi2W8yKKAJXq8FXhXS\nvzwM+As/Rj4kv9/ELJlChGvV7G+J0jwAmv836EaYSAz7H93s5iloZ57xAoGASKjn\nc5wOGADFaQDSox34Kwk2fiBLJLeDXYzbRtjjLqnRwXrAaZWZjelzDHye7dRW4jww\n4Mj+UirqDGSW2xJalM7FCBcEuuUfWYypz/MjhNeQRt7vmSfGy/9Ro8RQ7jkXMcyz\nrHtS2MxNZ9ZQGunkr1ETVWorMXIGwqF8yydxSAECgYEAnv5iKj7veayxbLyayiYW\nXdPRPNzFqYIlBuec7C9MgU5jzmuUtvRNi8D+jhMXVnNkS5gbsQe1L1su6PH881lF\nReZb2686NX8VDosm2+xEHcAe+fKoScmd+ZkMtZ/oO13AVt5xrHCPqZ5j9m3FZdmZ\n54hJLIuXf7Q7miG7FtTdEH8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "vincent-yang@striped-strata-217121.iam.gserviceaccount.com",
+  "client_id": "101791516984943619451",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vincent-yang%40striped-strata-217121.iam.gserviceaccount.com"
+}
