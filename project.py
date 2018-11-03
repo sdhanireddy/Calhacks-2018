@@ -84,7 +84,47 @@ def render_doc_text(filein, fileout):
     else:
         image.show()
 
-def read_text(image, borders):
+def read_text(image):
+    from google.cloud import vision_v1p3beta1 as vision
+    client = vision.ImageAnnotatorClient()
+
+    with io.open(image, 'rb') as image_file:
+        content = image_file.read()
+
+    image = vision.types.Image(content=content)
+    response = client.document_text_detection(image=image)
+
+    priceList = [] # a list of all the values
+    count = -1
+    for page in response.full_text_annotation.pages:
+        for block in page.blocks:
+            print('\nBlock confidence: {}\n'.format(block.confidence))
+
+            for paragraph in block.paragraphs:
+                print('Paragraph confidence: {}'.format(
+                    paragraph.confidence))
+
+                prevWord = None
+                for word in paragraph.words:
+                    word_text = ''.join([
+                        symbol.text for symbol in word.symbols
+                    ])
+                    print('Word text: {} (confidence: {})'.format(
+                        word_text, word.confidence))
+                    if word_text.isdigit() and prevWord != ".":
+                        num = int(word_text)
+                        count = 2
+                    elif word_text.isdigit() and prevWord == "." and count == 0:
+                        num = num + int(word_text)/100
+                        priceList.append(num)
+                        print(num)
+                    prevWord = word_text
+                    count -= 1
+    print(priceList)
+
+                    #for symbol in word.symbols:
+                    #    print('\tSymbol: {} (confidence: {})'.format(
+                    #        symbol.text, symbol.confidence))
 
 
 if __name__ == '__main__':
@@ -108,5 +148,7 @@ if __name__ == '__main__':
     if (userDecision == 'y'):
         correctImage = args.out_file
     elif (userDecision == 'n'):
+        pass
 
     # text detection
+    read_text(correctImage)
