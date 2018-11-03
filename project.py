@@ -132,7 +132,7 @@ def get_average_y(word):
     vertices = word.bounding_box.vertices
     BL_y = vertices[0].y
     UL_y = vertices[3].y
-    return (BL_y + UL_y)/2
+    return [(BL_y + UL_y)/2, UL_y, BL_y]
 
 # make wordList into a list of phrases that share 'same' y-avg
 def get_phrase_dict(wordList):
@@ -158,16 +158,24 @@ def join_phrase_price(phrases, prices):
     finalDict = {}
     # add all the phrases into the dict
     for y_coord in phrases:
-        finalDict[y_coord] = [phrases[y_coord]]
+        finalDict[y_coord] = [False, phrases[y_coord]]
     # add all the prices into the dict
     for price in prices:
-        y_coord = price[1]
-        upperY = y_coord + y_coordinate_error
-        lowerY = y_coord - y_coordinate_error
+        #y_coord = price[1]
+        upperPriceY = price[1][1]
+        lowerPriceY = price[1][2]
+
+        min_sum_squared = 100000000 #an arbitrary large number
+        #min(finalDict, key = lambda k: (upperDiff**2)+)
         for key in finalDict:
-            intKey = int(float(key))
-            if intKey <= upperY and intKey >= lowerY:
+            intKey = float(key)
+            upperDiff = upperPriceY - intKey
+            lowerDiff = lowerPriceY - intKey
+            sum_squared = (upperDiff)**2 + (lowerDiff)**2 # getting a measure for how 'horizontal' a price is with value
+            if sum_squared < min_sum_squared: #and finalDict[key][0] == False:
                 finalDict[key].append(price[0])
+                finalDict[key][0] = True
+                min_sum_squared = sum_squared
     return finalDict
 
 def read_text(image):
@@ -193,7 +201,7 @@ def read_text(image):
 
                 prevWord = None
                 for word in paragraph.words:
-                    #print(word.bounding_box.vertices[0].x)
+                    print(word.bounding_box.vertices)
                     word_text = ''.join([
                         symbol.text for symbol in word.symbols
                     ])
@@ -210,7 +218,7 @@ def read_text(image):
                         priceList.append((num, average_y))
                     else: # if normal text
                         average_y = get_average_y(word)
-                        wordList.append((word_text, average_y))
+                        wordList.append((word_text, average_y[0]))
                     prevWord = word_text
                     count -= 1
     phrasesDict = get_phrase_dict(wordList)
