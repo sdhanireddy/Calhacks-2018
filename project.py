@@ -173,16 +173,15 @@ def read_text(image):
 def gui(path):
     window = tk.Tk()
     window.title("Join")
-
+    #window.geometry("700x700")
     window.configure(background = 'grey')
 
     img = Image.open(path)
     width, height = img.size
-    ratio = int(height/width)
-    window.geometry("700x" + str(ratio * 700))
-    imgResized = img.resize((700, ratio * 700), Image.ANTIALIAS)
-    image = ImageTk.PhotoImage(img)
-
+    ratio = (height/width)
+    window.geometry("700x" + str(int(ratio * 700)))
+    imgResized = img.resize((700, int(ratio * 700)), Image.ANTIALIAS)
+    image = ImageTk.PhotoImage(imgResized)
     panel = tk.Label(window, image=image)
     panel.pack(side="right")
 
