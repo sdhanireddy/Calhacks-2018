@@ -18,6 +18,48 @@ class FeatureType(Enum):
     SYMBOL = 5
 
 
+def get_crop_hint(path):
+    """Detect crop hints on a single image and return the first result."""
+    client = vision.ImageAnnotatorClient()
+
+    with io.open(path, 'rb') as image_file:
+        content = image_file.read()
+
+    image = types.Image(content=content)
+
+    crop_hints_params = types.CropHintsParams(aspect_ratios=[1.77])
+    image_context = types.ImageContext(crop_hints_params=crop_hints_params)
+
+    response = client.crop_hints(image=image, image_context=image_context)
+    hints = response.crop_hints_annotation.crop_hints
+
+    # Get bounds for the first crop hint using an aspect ratio of 1.77.
+    vertices = hints[0].bounding_poly.vertices
+
+    return vertices
+
+def draw_hint(image_file):
+    """Draw a border around the image using the hints in the vector list."""
+    vects = get_crop_hint(image_file)
+
+    im = Image.open(image_file)
+    draw = ImageDraw.Draw(im)
+    draw.polygon([
+        vects[0].x, vects[0].y,
+        vects[1].x, vects[1].y,
+        vects[2].x, vects[2].y,
+        vects[3].x, vects[3].y], None, 'red')
+    im.save('output-hint.jpg', 'JPEG')
+
+def crop_to_hint(image_file):
+    """Crop the image using the hints in the vector list."""
+    vects = get_crop_hint(image_file)
+
+    im = Image.open(image_file)
+    im2 = im.crop([vects[0].x, vects[0].y,
+                  vects[2].x - 1, vects[2].y - 1])
+    im2.save('cropped.jpg', 'JPEG')
+
 def draw_boxes(image, bounds, color):
     """Draw a border around the image using the hints in the vector list."""
     draw = ImageDraw.Draw(image)
@@ -134,12 +176,20 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     parser = argparse.ArgumentParser()
-    render_doc_text(args.detect_file, args.out_file)
+    #render_doc_text(args.detect_file, args.out_file)
 
     # open the image to show users
-    img = Image.open(args.out_file)
+    img = Image.open(args.detect_file)
     img.show()
 
+    # make users crop the photo
+    input("Draw where to crop the image")
+    draw_hint(args.detect_file)
+    crop_to_hint(args.detect_file)
+
+    render_doc_text("cropped.jpg", args.out_file)
+    croppedImage = Image.open(args.out_file)
+    croppedImage.show()
     # give users the option to say yes or no to the boardered image
     userDecision = input("Are these borders correct? (y/n)")
     userDecision = userDecision.lower()
