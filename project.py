@@ -4,11 +4,12 @@ import io
 import os
 import argparse
 from enum import Enum
+import tkinter as tk
 
 # Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageTk
 
 class FeatureType(Enum):
     PAGE = 1
@@ -169,6 +170,18 @@ def read_text(image):
                     #        symbol.text, symbol.confidence))
 
 
+def gui(path):
+    window = tk.Tk()
+    window.title("Join")
+    window.geometry("300x300")
+    window.configure(background = 'grey')
+
+    img = ImageTk.PhotoImage(Image.open(path))
+    panel = tk.Label(window, img=img)
+    panel.pack(side="bottom", fill="both",expand="yes")
+
+    window.mainloop()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('detect_file', help='The image for text detection.')
@@ -177,7 +190,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     #render_doc_text(args.detect_file, args.out_file)
-
+    gui(args.detect_file)
     # open the image to show users
     img = Image.open(args.detect_file)
     img.show()
