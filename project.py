@@ -4,12 +4,15 @@ import io
 import os
 import argparse
 from enum import Enum
-import tkinter as tk
+from tkinter import *
 
 # Imports the Google Cloud client library
 from google.cloud import vision
 from google.cloud.vision import types
+#from google.cloud.vision_v1.types.Vertex
 from PIL import Image, ImageDraw, ImageTk
+
+WIDTH = 300
 
 class FeatureType(Enum):
     PAGE = 1
@@ -19,29 +22,44 @@ class FeatureType(Enum):
     SYMBOL = 5
 
 
-def get_crop_hint(path):
+def get_crop_hint(path, upper, lower):
     """Detect crop hints on a single image and return the first result."""
-    client = vision.ImageAnnotatorClient()
+    #client = vision.ImageAnnotatorClient()
 
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
+    #with io.open(path, 'rb') as image_file:
+    #    content = image_file.read()
 
-    image = types.Image(content=content)
+    #image = types.Image(content=content)
 
-    crop_hints_params = types.CropHintsParams(aspect_ratios=[1.77])
-    image_context = types.ImageContext(crop_hints_params=crop_hints_params)
+    #crop_hints_params = types.CropHintsParams(aspect_ratios=[1.77])
+    #image_context = types.ImageContext(crop_hints_params=crop_hints_params)
 
-    response = client.crop_hints(image=image, image_context=image_context)
-    hints = response.crop_hints_annotation.crop_hints
+    #response = client.crop_hints(image=image, image_context=image_context)
+    #hints = response.crop_hints_annotation.crop_hints
 
     # Get bounds for the first crop hint using an aspect ratio of 1.77.
-    vertices = hints[0].bounding_poly.vertices
-
+    #vertices = hints[0].bounding_poly.vertices
+    Vertex = types.Vertex
+    #print(Vertex.__dict__)
+    # make a list of vertices
+    bottomLeft = Vertex()
+    bottomLeft.x = int(upper[0])
+    bottomLeft.y = int(lower[1])
+    bottomRight = Vertex()
+    bottomRight.x = int(lower[0])
+    bottomRight.y = int(lower[1])
+    upperRight = Vertex()
+    upperRight.x = int(lower[0])
+    upperRight.y = int(upper[1])
+    upperLeft = Vertex()
+    upperLeft.x = int(upper[0])
+    upperLeft.y = int(upper[1])
+    vertices = [bottomLeft, bottomRight, upperRight, upperLeft]
     return vertices
 
-def draw_hint(image_file):
+def draw_hint(image_file, upper, lower):
     """Draw a border around the image using the hints in the vector list."""
-    vects = get_crop_hint(image_file)
+    vects = get_crop_hint(image_file, upper, lower)
 
     im = Image.open(image_file)
     draw = ImageDraw.Draw(im)
@@ -50,15 +68,16 @@ def draw_hint(image_file):
         vects[1].x, vects[1].y,
         vects[2].x, vects[2].y,
         vects[3].x, vects[3].y], None, 'red')
-    im.save('output-hint.jpg', 'JPEG')
+    im.save('output-hint.jpg', 'jpg')
 
-def crop_to_hint(image_file):
+def crop_to_hint(image_file, upper, lower):
     """Crop the image using the hints in the vector list."""
-    vects = get_crop_hint(image_file)
+    #vects = get_crop_hint(image_file, upper, lower)
 
     im = Image.open(image_file)
-    im2 = im.crop([vects[0].x, vects[0].y,
-                  vects[2].x - 1, vects[2].y - 1])
+    w, h = im.size
+    im2 = im.crop([0, upper,
+                  w-1, lower])
     im2.save('cropped.jpg', 'JPEG')
 
 def draw_boxes(image, bounds, color):
@@ -240,21 +259,44 @@ def read_text(image):
 
 
 def gui(path):
-    window = tk.Tk()
-    window.title("Join")
-    #window.geometry("700x700")
-    window.configure(background = 'grey')
+    window = Frame()
+    window.pack(expand=YES,fill=BOTH)
+    window.master.title('wobba wobba')
 
     img = Image.open(path)
+
     width, height = img.size
     ratio = (height/width)
-    window.geometry("700x" + str(int(ratio * 700)))
-    imgResized = img.resize((700, int(ratio * 700)), Image.ANTIALIAS)
-    image = ImageTk.PhotoImage(imgResized)
-    panel = tk.Label(window, image=image)
-    panel.pack(side="right")
+    img = img.resize((WIDTH, int(ratio * WIDTH)), Image.ANTIALIAS)
+    image = ImageTk.PhotoImage(img)
 
+    panel = Label(window, image=image)
+    #window.geometry("700x" + str(int(ratio * 700)))
+    panel.pack(fill = "both", expand = "yes")
+
+    text = StringVar()
+    text.set('Choose upper bound')
+    label = Label(window, textvariable = text)
+    label.pack(side = "bottom")
+    upper = None
+    lower = None
+    count = 2
+    def onRelease(event):
+        nonlocal count, upper, lower
+        if count == 2:
+            text.set('Choose lower bound')
+            upper = event.y
+            count -= 1
+        elif count == 1:
+            text.set('Close window')
+            lower = event.y
+    panel.bind("<ButtonRelease-1>", onRelease )
     window.mainloop()
+    if upper is None or lower is None:
+        raise Exception("didn't pick upper and lower bounds")
+    upper = upper * width/WIDTH
+    lower = lower * width/WIDTH
+    return int(upper), int( lower)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -263,15 +305,17 @@ if __name__ == '__main__':
     args = parser.parse_args()
     parser = argparse.ArgumentParser()
     render_doc_text(args.detect_file, args.out_file)
-    gui(args.detect_file)
+
+    # get user values to prepare for crop
+    upper, lower = gui(args.detect_file)
+
     # open the image to show users
-    img = Image.open(args.detect_file)
-    img.show()
+    #img = Image.open(args.detect_file)
+    #img.show()
 
     # make users crop the photo
-    input("Draw where to crop the image")
-    draw_hint(args.detect_file)
-    crop_to_hint(args.detect_file)
+    #draw_hint(args.detect_file, upper, lower)
+    crop_to_hint(args.detect_file, upper, lower)
 
     render_doc_text("cropped.jpg", args.out_file)
     croppedImage = Image.open(args.out_file)
