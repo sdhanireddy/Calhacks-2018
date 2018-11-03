@@ -134,7 +134,23 @@ def get_average_y(word):
     UL_y = vertices[3].y
     return (BL_y + UL_y)/2
 
-#
+# make wordList into a list of phrases that share 'same' y-avg
+def get_phrase_dict(wordList):
+    phrases = {}
+    y_coordinate_error = 35 # value subject to change
+    for word in wordList:
+        wordplaced = False # to ensure that the word is placed in dict somewhere
+        y_coord = word[1]
+        upperY = y_coord + 35
+        lowerY = y_coord - 35
+        for key in phrases:
+            intKey = int(float(key)) # convert the string key values of dict to int
+            if intKey <= upperY and intKey >= lowerY:
+                phrases[key].append(word[0])
+                wordplaced = True
+        if (wordplaced == False):
+            phrases[str(word[1])] = [word[0]]
+    return phrases
 
 def read_text(image):
     from google.cloud import vision_v1p3beta1 as vision
@@ -159,7 +175,7 @@ def read_text(image):
 
                 prevWord = None
                 for word in paragraph.words:
-                    print(word.bounding_box.vertices[0].x)
+                    #print(word.bounding_box.vertices[0].x)
                     word_text = ''.join([
                         symbol.text for symbol in word.symbols
                     ])
@@ -179,6 +195,8 @@ def read_text(image):
                         wordList.append((word_text, average_y))
                     prevWord = word_text
                     count -= 1
+    phrasesDict = get_phrase_dict(wordList)
+    print(phrasesDict)
     print(priceList)
 
                     #for symbol in word.symbols:
