@@ -127,6 +127,15 @@ def render_doc_text(filein, fileout):
     else:
         image.show()
 
+# get the average y-coordinate for a particular WORD
+def get_average_y(word):
+    vertices = word.bounding_box.vertices
+    BL_y = vertices[0].y
+    UL_y = vertices[3].y
+    return (BL_y + UL_y)/2
+
+#
+
 def read_text(image):
     from google.cloud import vision_v1p3beta1 as vision
     client = vision.ImageAnnotatorClient()
@@ -137,7 +146,8 @@ def read_text(image):
     image = vision.types.Image(content=content)
     response = client.document_text_detection(image=image)
 
-    priceList = [] # a list of all the values
+    priceList = [] # a list of all the values with their coordinates
+    wordList = [] # a list of all the words
     count = -1
     for page in response.full_text_annotation.pages:
         for block in page.blocks:
@@ -149,18 +159,24 @@ def read_text(image):
 
                 prevWord = None
                 for word in paragraph.words:
+                    print(word.bounding_box.vertices[0].x)
                     word_text = ''.join([
                         symbol.text for symbol in word.symbols
                     ])
                     print('Word text: {} (confidence: {})'.format(
                         word_text, word.confidence))
+
+                    # put the words in the right list
                     if word_text.isdigit() and prevWord != ".":
                         num = int(word_text)
                         count = 2
                     elif word_text.isdigit() and prevWord == "." and count == 0:
                         num = num + int(word_text)/100
-                        priceList.append(num)
-                        print(num)
+                        average_y = get_average_y(word)
+                        priceList.append((num, average_y))
+                    else: # if normal text
+                        average_y = get_average_y(word)
+                        wordList.append((word_text, average_y))
                     prevWord = word_text
                     count -= 1
     print(priceList)
@@ -192,9 +208,8 @@ if __name__ == '__main__':
     parser.add_argument('detect_file', help='The image for text detection.')
     parser.add_argument('-out_file', help='Optional output file', default=0)
     args = parser.parse_args()
-
     parser = argparse.ArgumentParser()
-    #render_doc_text(args.detect_file, args.out_file)
+    render_doc_text(args.detect_file, args.out_file)
     gui(args.detect_file)
     # open the image to show users
     img = Image.open(args.detect_file)
