@@ -141,8 +141,8 @@ def get_phrase_dict(wordList):
     for word in wordList:
         wordplaced = False # to ensure that the word is placed in dict somewhere
         y_coord = word[1]
-        upperY = y_coord + 35
-        lowerY = y_coord - 35
+        upperY = y_coord + y_coordinate_error
+        lowerY = y_coord - y_coordinate_error
         for key in phrases:
             intKey = int(float(key)) # convert the string key values of dict to int
             if intKey <= upperY and intKey >= lowerY:
@@ -151,6 +151,24 @@ def get_phrase_dict(wordList):
         if (wordplaced == False):
             phrases[str(word[1])] = [word[0]]
     return phrases
+
+# join the phrases with their respective price
+def join_phrase_price(phrases, prices):
+    y_coordinate_error = 55 # subject to change
+    finalDict = {}
+    # add all the phrases into the dict
+    for y_coord in phrases:
+        finalDict[y_coord] = [phrases[y_coord]]
+    # add all the prices into the dict
+    for price in prices:
+        y_coord = price[1]
+        upperY = y_coord + y_coordinate_error
+        lowerY = y_coord - y_coordinate_error
+        for key in finalDict:
+            intKey = int(float(key))
+            if intKey <= upperY and intKey >= lowerY:
+                finalDict[key].append(price[0])
+    return finalDict
 
 def read_text(image):
     from google.cloud import vision_v1p3beta1 as vision
@@ -196,8 +214,14 @@ def read_text(image):
                     prevWord = word_text
                     count -= 1
     phrasesDict = get_phrase_dict(wordList)
+    finalDict = join_phrase_price(phrasesDict, priceList)
     print(phrasesDict)
+    print("\n")
     print(priceList)
+    print("\n")
+    print(finalDict)
+    print("\n")
+    print(finalDict.values())
 
                     #for symbol in word.symbols:
                     #    print('\tSymbol: {} (confidence: {})'.format(
