@@ -8,7 +8,6 @@ import time
 
 from AbbyyOnlineSdk import *
 
-
 processor = None
 
 def setup_processor():
