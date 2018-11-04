@@ -235,7 +235,7 @@ def read_text(image):
                         num = int(word_text)
                         count = 1
                     elif word_text.isdigit() and prevWord == "." and count == 0:
-                        num = num + int(word_text)/100
+                        num = str(num) + "." + word_text
                         average_y = get_average_y(word)
                         priceList.append((num, average_y))
                         count = -1
@@ -254,7 +254,7 @@ def read_text(image):
     print("\n")
     print(finalDict)
     print("\n")
-    print(finalDict.values())
+    return (finalDict.values())
 
                     #for symbol in word.symbols:
                     #    print('\tSymbol: {} (confidence: {})'.format(
@@ -302,15 +302,7 @@ def gui(path):
     return int(upper), int( lower)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('detect_file', help='The image for text detection.')
-    parser.add_argument('-out_file', help='Optional output file', default=0)
-    args = parser.parse_args()
-    parser = argparse.ArgumentParser()
-    render_doc_text(args.detect_file, args.out_file)
 
-    # get user values to prepare for crop
-    upper, lower = gui(args.detect_file)
 
     # open the image to show users
     #img = Image.open(args.detect_file)
@@ -318,20 +310,65 @@ if __name__ == '__main__':
 
     # make users crop the photo
     #draw_hint(args.detect_file, upper, lower)
-    crop_to_hint(args.detect_file, upper, lower)
+    good = False
+    while (good == False):
+        parser = argparse.ArgumentParser()
+        parser.add_argument('detect_file', help='The image for text detection.')
+        parser.add_argument('-out_file', help='Optional output file', default=0)
+        args = parser.parse_args()
+        parser = argparse.ArgumentParser()
+        render_doc_text(args.detect_file, args.out_file)
 
-    render_doc_text("cropped.jpg", args.out_file)
-    croppedImage = Image.open(args.out_file)
-    croppedImage.show()
+    # get user values to prepare for crop
+        upper, lower = gui(args.detect_file)
+        crop_to_hint(args.detect_file, upper, lower)
+
+        render_doc_text("cropped.jpg", args.out_file)
+        croppedImage = Image.open(args.out_file)
+        croppedImage.show()
     # give users the option to say yes or no to the boardered image
-    userDecision = input("Are these borders correct? (y/n)")
-    userDecision = userDecision.lower()
-    while (userDecision != 'y' and userDecision != 'n'):
-        userDecision = input("Type 'y' or 'n'")
-    if (userDecision == 'y'):
-        correctImage = args.out_file
-    elif (userDecision == 'n'):
-        pass
+        userDecision = input("Are these borders correct? (y/n)")
+        userDecision = userDecision.lower()
+        while (userDecision != 'y' and userDecision != 'n'):
+            userDecision = input("Type 'y' or 'n'")
+        if (userDecision == 'y'):
+            correctImage = args.out_file
+            good = True
+        elif (userDecision == 'n'):
+            continue
 
     # text detection
-    read_text(correctImage)
+    final_dict = read_text(correctImage)
+    #distribute prices
+    print(final_dict)
+    count = 1
+    person_dict = {}
+    userInput = input("how many people?")
+    tax = input("tax? (input in decimals. e.g. .09 for 9%)  ")
+    tips = input("tips? (input in decimals. e.g. .15 for 15%)  ")
+    while count <= int(userInput):
+        person_dict[count] = []
+        count += 1
+    for key in final_dict:
+        string = ""
+        for word in key[1]:
+            string += word
+            string += " "   
+        if(key[0] == False):
+            use = input("Couldn't find price for: " + string + ". Input price here: ")
+            use2 = input("Which person (1~" + userInput + ")")
+            person_dict[int(use2)].append(use)
+            continue
+        print("Item: " + string + " Price: $" + str(key[2]))
+        userIn = input("Which person (1~" + userInput + ")")
+        userIn = userIn.lower()
+        # while(userIn != '1' and userIn != '2'):
+        #     userIn = input("Type '1' or '2'")
+        person_dict[int(userIn)].append(key[2])
+    print(person_dict) 
+    for person in person_dict:
+        price_total = 0
+        for price in person_dict[person]:
+            price_total += float(price)
+        print("Person " + str(person) + ", pay $" + str(price_total * (1 + float(tax)) * (1 + float(tips))))
+
