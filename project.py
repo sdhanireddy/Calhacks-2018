@@ -183,18 +183,21 @@ def join_phrase_price(phrases, prices):
         #y_coord = price[1]
         upperPriceY = price[1][1]
         lowerPriceY = price[1][2]
-
+        lowestKey = -1
         min_sum_squared = 100000000 #an arbitrary large number
         #min(finalDict, key = lambda k: (upperDiff**2)+)
         for key in finalDict:
             intKey = float(key)
+            
             upperDiff = upperPriceY - intKey
             lowerDiff = lowerPriceY - intKey
             sum_squared = (upperDiff)**2 + (lowerDiff)**2 # getting a measure for how 'horizontal' a price is with value
             if sum_squared < min_sum_squared: #and finalDict[key][0] == False:
-                finalDict[key].append(price[0])
-                finalDict[key][0] = True
+                lowestKey = intKey
                 min_sum_squared = sum_squared
+
+        finalDict[str(lowestKey)].append(price[0])
+        finalDict[str(lowestKey)][0] = True
     return finalDict
 
 def read_text(image):
